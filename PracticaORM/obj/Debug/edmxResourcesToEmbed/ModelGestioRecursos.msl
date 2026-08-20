@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GestionResiduosModelStoreContainer" CdmEntityContainer="GestionResiduosEntities">
+    <EntitySetMapping Name="Comarcas">
+      <EntityTypeMapping TypeName="GestionResiduosModel.Comarcas">
+        <MappingFragment StoreEntitySet="Comarcas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Capital" ColumnName="Capital" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Municipios">
+      <EntityTypeMapping TypeName="GestionResiduosModel.Municipios">
+        <MappingFragment StoreEntitySet="Municipios">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="ComarcaId" ColumnName="ComarcaId" />
+          <ScalarProperty Name="NumHabitants" ColumnName="NumHabitants" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Residus">
+      <EntityTypeMapping TypeName="GestionResiduosModel.Residus">
+        <MappingFragment StoreEntitySet="Residus">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Anyo" ColumnName="Anyo" />
+          <ScalarProperty Name="MunicipioId" ColumnName="MunicipioId" />
+          <ScalarProperty Name="MateriaOrganica" ColumnName="MateriaOrganica" />
+          <ScalarProperty Name="PodaJardineria" ColumnName="PodaJardineria" />
+          <ScalarProperty Name="PaperCartro" ColumnName="PaperCartro" />
+          <ScalarProperty Name="Vidre" ColumnName="Vidre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

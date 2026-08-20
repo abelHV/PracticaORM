@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GestionResiduosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Comarcas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Capital" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Municipios">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ComarcaId" Type="int" Nullable="false" />
+    <Property Name="NumHabitants" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Residus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Anyo" Type="int" Nullable="false" />
+    <Property Name="MunicipioId" Type="int" Nullable="false" />
+    <Property Name="MateriaOrganica" Type="float" />
+    <Property Name="PodaJardineria" Type="float" />
+    <Property Name="PaperCartro" Type="float" />
+    <Property Name="Vidre" Type="float" />
+  </EntityType>
+  <Association Name="FK_Municipio_Comarca">
+    <End Role="Comarcas" Type="Self.Comarcas" Multiplicity="1" />
+    <End Role="Municipios" Type="Self.Municipios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Comarcas">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Municipios">
+        <PropertyRef Name="ComarcaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Residuo_Municipio">
+    <End Role="Municipios" Type="Self.Municipios" Multiplicity="1" />
+    <End Role="Residus" Type="Self.Residus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Municipios">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Residus">
+        <PropertyRef Name="MunicipioId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GestionResiduosModelStoreContainer">
+    <EntitySet Name="Comarcas" EntityType="Self.Comarcas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Municipios" EntityType="Self.Municipios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Residus" EntityType="Self.Residus" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Municipio_Comarca" Association="Self.FK_Municipio_Comarca">
+      <End Role="Comarcas" EntitySet="Comarcas" />
+      <End Role="Municipios" EntitySet="Municipios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Residuo_Municipio" Association="Self.FK_Residuo_Municipio">
+      <End Role="Municipios" EntitySet="Municipios" />
+      <End Role="Residus" EntitySet="Residus" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
